@@ -45,14 +45,13 @@
 {#if shownUpdates.length > $threshold}
 	<div class="mb-1 mr-3 flex items-center rounded-lg bg-accent-700 py-1 pl-3 pr-1 text-accent-100">
 		<Icon icon="mdi:arrow-up-circle" class="mr-2 text-xl" />
-		There {shownUpdates.length === 1 ? 'is' : 'are'}
-		<b class="mx-1">{shownUpdates.length}</b>
-		{shownUpdates.length === 1 ? ' update' : ' updates'} available.
+		有{shownUpdates.length === 1 ? '1个' : shownUpdates.length + '个'}
+		{shownUpdates.length === 1 ? '更新' : '更新项'}可用。
 		<Button.Root
 			class="ml-1 font-semibold text-white hover:text-accent-200 hover:underline"
 			on:click={() => (popupOpen = true)}
 		>
-			Update all?
+		全部更新吗?
 		</Button.Root>
 
 		<Button.Root

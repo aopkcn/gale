@@ -32,14 +32,13 @@
 </script>
 
 <div class="flex items-center">
-	<Label text="Launch mode">
-		<p>Determines how the game is launched.</p>
+	<Label text="启动模式">
+		<p>决定游戏的启动方式。</p>
 		<p class="my-1.5">
-			<b>Launcher:</b> Launches through the specified platform.
+			<b>启动器：</b> 通过指定的平台启动游戏。
 		</p>
 		<p>
-			<b>Direct:</b> Launches the game directly from the executable. Allows you to launch multiple instances
-			at once.
+			<b>直接：</b> 直接从可执行文件启动游戏。允许同时启动多个实例。
 		</p>
 	</Label>
 

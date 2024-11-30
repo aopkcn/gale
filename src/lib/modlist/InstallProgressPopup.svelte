@@ -53,11 +53,11 @@
 
 <Popup
 	bind:open
-	title="Installing mods ({progress.installedMods}/{progress.totalMods})"
+	title="安装模组 ({progress.installedMods}/{progress.totalMods})"
 	canClose={progress.canCancel}
 	onClose={() => invokeCommand('cancel_install')}
 	confirmClose={{
-		message: 'Are you sure you want to abort the installation?'
+		message: '您确实要中止安装吗？'
 	}}
 >
 	<Dialog.Description class="text-slate-400">

@@ -158,7 +158,7 @@
 				on:click={() => {
 					open = false;
 					data = null;
-				}}>Cancel</BigButton
+				}}>取消</BigButton
 			>
 			<BigButton disabled={!nameAvailable || loading} on:click={importData}>Import</BigButton>
 		</div>

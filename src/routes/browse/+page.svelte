@@ -113,10 +113,10 @@
 			disabled={selectedMod?.isInstalled}
 		>
 			{#if selectedMod?.isInstalled}
-				Already installed
+			    已安装
 			{:else}
 				<Icon icon="mdi:download" class="align-middle text-xl" />
-				Install
+				安装
 				{#if selectedDownloadSize !== null && selectedDownloadSize > 0}
 					({shortenFileSize(selectedDownloadSize)})
 				{/if}

@@ -18,13 +18,13 @@
 
 	const defaultContextItems: ModContextItem[] = [
 		{
-			label: 'Open website',
+			label: '打开网站',
 			icon: 'mdi:open-in-new',
 			onclick: (mod) => openIfNotNull(mod.websiteUrl),
 			showFor: (mod) => mod.websiteUrl !== null && mod.websiteUrl.length > 0
 		},
 		{
-			label: 'Donate',
+			label: '捐',
 			icon: 'mdi:heart',
 			onclick: (mod) => openIfNotNull(mod.donateUrl),
 			showFor: (mod) => mod.donateUrl !== null
@@ -89,7 +89,7 @@
 	<div class="flex w-[60%] flex-grow flex-col overflow-hidden pl-3 pt-3">
 		<div class="mb-1.5 flex flex-wrap gap-1.5 pr-3">
 			<div class="relative flex-grow-[3]">
-				<SearchBar bind:value={$queryArgs.searchTerm} placeholder="Search for mods..." />
+				<SearchBar bind:value={$queryArgs.searchTerm} placeholder="搜索模组..." />
 			</div>
 
 			<div class="flex flex-grow gap-1.5">
@@ -100,7 +100,7 @@
 						: 'mdi:sort-ascending'}
 					items={[SortOrder.Descending, SortOrder.Ascending]}
 					bind:selected={$queryArgs.sortOrder}
-					getLabel={sentenceCase}
+					getLabel={value => value === SortOrder.Descending ? '降序' : '升序'}
 					multiple={false}
 				/>
 
@@ -108,7 +108,30 @@
 					class="flex-grow basis-0 py-1.5"
 					items={sortOptions}
 					bind:selected={$queryArgs.sortBy}
-					getLabel={sentenceCase}
+					getLabel={value => {
+						switch (value) {
+							case 'newest':
+								return '最新';
+							case 'name':
+								return '名称';
+							case 'author':
+								return '作者';
+							case 'lastUpdated':
+								return '最后更新';
+							case 'downloads':
+								return '下载量';
+							case 'rating':
+								return '评分';
+							case 'installDate':
+								return '安装日期';
+							case 'custom':
+								return '自定义';
+							case 'diskSpace':
+								return '大小';
+							default:
+								return value;  // 默认返回原始值（如果有其他值时）
+						}
+					}}
 					icon="mdi:sort"
 					multiple={false}
 				/>
@@ -117,30 +140,30 @@
 
 		<div class="mb-1.5 flex items-start gap-1.5 pr-3">
 			<ModListCategoryFilter
-				label="Include categories"
+				label="包含分类"
 				icon="mdi:filter"
 				bind:selected={$queryArgs.includeCategories}
 				bind:excluded={$queryArgs.excludeCategories}
 			/>
 
 			<ModListCategoryFilter
-				label="Exclude categories"
+				label="排除分类"
 				icon="mdi:filter-remove"
 				bind:selected={$queryArgs.excludeCategories}
 				bind:excluded={$queryArgs.includeCategories}
 			/>
 
 			<Dropdown
-				overrideLabel="Include"
+				overrideLabel="包含"
 				icon="mdi:filter"
 				class="min-w-36 flex-grow basis-0 py-1.5"
-				items={['Deprecated', 'NSFW', 'Enabled', 'Disabled']}
+				items={['弃用', '成人内容', '启用', '禁用']}
 				selected={getSelectedIncludes()}
 				onSelectedChange={(items) => {
-					$queryArgs.includeEnabled = items.includes('Enabled');
-					$queryArgs.includeDeprecated = items.includes('Deprecated');
-					$queryArgs.includeNsfw = items.includes('NSFW');
-					$queryArgs.includeDisabled = items.includes('Disabled');
+					$queryArgs.includeEnabled = items.includes('启用');
+					$queryArgs.includeDeprecated = items.includes('弃用');
+					$queryArgs.includeNsfw = items.includes('成人内容');
+					$queryArgs.includeDisabled = items.includes('禁用');
 				}}
 				multiple
 			/>
@@ -149,7 +172,7 @@
 		<slot name="banner" />
 
 		{#if mods.length === 0}
-			<div class="mt-4 text-center text-lg text-slate-300">No mods found 😥</div>
+			<div class="mt-4 text-center text-lg text-slate-300">未找到模组 😥</div>
 		{:else}
 			<VirtualList
 				itemHeight={66}

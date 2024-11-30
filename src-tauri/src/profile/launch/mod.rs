@@ -166,13 +166,13 @@ fn game_dir(game: Game, prefs: &Prefs) -> Result<PathBuf> {
             Some(Platform::XboxStore) => xbox_game_dir(game)?,
             #[cfg(windows)]
             Some(Platform::EpicGames) => epic_game_dir(game)?,
-            _ => bail!("game directory not found, you may need to specify it in the settings"),
+            _ => bail!("未找到游戏目录，您可能需要在设置中指定它。"),
         }
     };
 
     ensure!(
         path.exists(),
-        "game directory not found, please check your settings (expected at {})",
+        "未找到游戏目录，请检查您的设置（期望路径：{}）",
         path.display()
     );
 
@@ -181,13 +181,13 @@ fn game_dir(game: Game, prefs: &Prefs) -> Result<PathBuf> {
 
 fn steam_game_dir(game: Game, prefs: &Prefs) -> Result<PathBuf> {
     let Some(steam) = &game.platforms.steam else {
-        bail!("{} is not available on Steam", game.name)
+        bail!("{} 在 Steam 上不可用", game.name)
     };
 
     let mut path = prefs
         .steam_library_dir
         .as_ref()
-        .ok_or_eyre("steam library directory not set")?
+        .ok_or_eyre("未设置 Steam 库目录")?
         .to_path_buf();
 
     if !path.ends_with("common") {
@@ -199,7 +199,7 @@ fn steam_game_dir(game: Game, prefs: &Prefs) -> Result<PathBuf> {
     }
 
     info!(
-        "using {} path from steam library at {}",
+        "正在使用 {} 路径，来自 Steam 库：{}",
         game.slug,
         path.display()
     );

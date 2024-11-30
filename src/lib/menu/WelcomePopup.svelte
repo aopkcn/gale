@@ -76,69 +76,68 @@
 	}
 </script>
 
-<Popup title="Welcome to Gale!" canClose={stage === 'end'} bind:open>
+<Popup title="欢迎来到 Gale!" canClose={stage === 'end'} bind:open>
 	<div class="text-slate-300">
 		{#if stage === 'gameSelect'}
-			To get started, select a game to mod:
+			首先，选择一个游戏进行修改：
 			<GameSelection onSelect={onSelectGame} />
 		{:else if stage === 'importProfiles' && importData}
 			<p>
-				You can choose to automatically transfer profiles from {importText} to Gale.
+				您可以选择自动将配置文件从 {importText} 转移到 Gale。
 			</p>
 
 			<p class="mt-1">
-				The process may take a couple of minutes, depending on how many mods and profiles there are
-				to import.
+				这个过程可能需要几分钟，具体取决于需要导入的修改和配置文件数量。
 			</p>
 
 			<p class="mt-1">
-				You can always import profiles later by going to <b>Import &gt; ...from r2modman</b>.
+				您也可以稍后通过进入 <b>导入 &gt; ...从 r2modman 导入</b> 来导入配置文件。
 			</p>
 
 			<ImportR2Flow bind:importData bind:importFrom bind:this={importFlow} />
 
 			<div class="mt-2 flex gap-1.5">
 				<BigButton color="slate" class="mr-auto" on:click={() => (stage = 'gameSelect')}
-					>Back</BigButton
+					>返回</BigButton
 				>
-				<BigButton color="slate" on:click={() => (stage = 'settings')}>Skip</BigButton>
-				<BigButton color="accent" on:click={importProfiles}>Import</BigButton>
+				<BigButton color="slate" on:click={() => (stage = 'settings')}>跳过</BigButton>
+				<BigButton color="accent" on:click={importProfiles}>导入</BigButton>
 			</div>
 		{:else if stage === 'settings'}
 			<p>
-				Let's make sure your settings are correct.
+				让我们确保您的设置是正确的。
 				<br />
-				You can always edit these later by going to <Icon icon="mdi:settings" class="mb-1 inline" />
-				<b>Settings</b>.
+				您随时可以通过进入 <Icon icon="mdi:settings" class="mb-1 inline" />
+				<b>设置</b> 来编辑这些设置。
 			</p>
 
 			<div class="mt-3 flex flex-col gap-1">
 				{#if prefs !== null}
 					<PathPref
-						label="Steam executable"
+						label="Steam 执行文件"
 						type="file"
 						value={prefs.steamExePath}
 						set={set((value, prefs) => (prefs.steamExePath = value))}
 					>
-						Path to the Steam executable.
+						Steam 执行文件的路径。
 					</PathPref>
 
 					<PathPref
-						label="Steam library"
+						label="Steam 库"
 						type="dir"
 						value={prefs.steamLibraryDir}
 						set={set((value, prefs) => (prefs.steamLibraryDir = value))}
 					>
-						Path to the Steam game library. This should <b>contain</b> the 'steamapps' directory.
+						Steam 游戏库的路径。此路径应 <b>包含</b> 'steamapps' 目录。
 					</PathPref>
 
 					<PathPref
-						label="Gale data directory"
+						label="Gale 数据目录"
 						type="dir"
 						value={prefs.dataDir}
 						set={set((value, prefs) => (prefs.dataDir = value))}
 					>
-						Directory where mods and profiles are stored.
+					 存储修改和配置文件的目录。
 					</PathPref>
 				{/if}
 			</div>
@@ -148,21 +147,20 @@
 					color="slate"
 					on:click={() =>
 						(stage =
-							importData.r2modman || importData.thunderstore ? 'importProfiles' : 'gameSelect')}
-					>Back</BigButton
-				>
-				<BigButton color="accent" on:click={() => (stage = 'end')}>Next</BigButton>
+							importData.r2modman || importData.thunderstore ? 'importProfiles' : 'gameSelect')}>返回</BigButton>
+				<BigButton color="accent" on:click={() => (stage = 'end')}>下一步</BigButton>
 			</div>
 		{:else if stage === 'end'}
-			<p>That's it, you're all set up to start modding!</p>
+			<p>就是这样，您已经准备好开始修改了！</p>
 
 			<p class="mt-1">
-				If you have any questions or need help, feel free to ask in the <a
+				如果您有任何问题或需要帮助，请随时在 <a
 					href="https://discord.gg/sfuWXRfeTt"
 					target="_blank"
-					class="text-accent-400 hover:underline">Discord server</a
-				>.
+					class="text-accent-400 hover:underline">Discord 服务器</a>
+				> 提问。
 			</p>
 		{/if}
 	</div>
 </Popup>
+

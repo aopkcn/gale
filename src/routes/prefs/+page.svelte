@@ -55,38 +55,38 @@
 
 <div class="flex w-full flex-col gap-1 overflow-y-auto px-6 pb-6 pt-2">
 	{#if prefs !== null && gamePrefs !== null}
-		<LargePrefsHeading>Global settings</LargePrefsHeading>
+		<LargePrefsHeading>全局设置</LargePrefsHeading>
 
-		<SmallPrefsHeading>Locations</SmallPrefsHeading>
+		<SmallPrefsHeading>位置</SmallPrefsHeading>
 
 		<PathPref
-			label="Steam executable"
+			label="Steam 可执行文件"
 			type="file"
 			value={prefs.steamExePath ?? null}
 			set={set((value, prefs) => (prefs.steamExePath = value))}
 		>
-			Path to the Steam executable (steam.exe). Used for Steam launching.
+		Steam 可执行文件（steam.exe）的路径，用于启动 Steam。
 		</PathPref>
 
 		<PathPref
-			label="Steam library"
+			label="Steam 库"
 			type="dir"
 			value={prefs.steamLibraryDir ?? null}
 			set={set((value, prefs) => (prefs.steamLibraryDir = value))}
 		>
-			Path to your default Steam game library. Used to find the location of Steam games.
+		默认 Steam 游戏库的路径，用于查找 Steam 游戏的位置。
 		</PathPref>
 
 		<PathPref
-			label="Data directory"
+			label="数据目录"
 			type="dir"
 			value={prefs.dataDir}
 			set={set((value, prefs) => (prefs.dataDir = value))}
 		>
-			Directory where mods and profiles are stored. Changing this will move the existing data.
+		存储插件和配置文件的目录。更改此目录将移动现有数据。
 		</PathPref>
 
-		<SmallPrefsHeading>Appearance</SmallPrefsHeading>
+		<SmallPrefsHeading>外观</SmallPrefsHeading>
 
 		<AccentColorPref />
 
@@ -95,45 +95,44 @@
 			set={set((value, prefs) => (prefs.zoomFactor = value))}
 		/>
 
-		<SmallPrefsHeading>Miscellaneous</SmallPrefsHeading>
+		<SmallPrefsHeading>其他</SmallPrefsHeading>
 
 		<ApiKeyPref />
 
 		<TogglePref
-			label="Fetch mods automatically"
+			label="自动获取插件"
 			value={prefs.fetchModsAutomatically}
 			set={set((value, prefs) => (prefs.fetchModsAutomatically = value))}
 		>
-			Whether to automatically fetch mods every 15 minutes. This will ensure the mod list stays
-			relatively up-to-date, but can be disabled to save bandwidth.
-			<br />
-			To manually trigger a fetch, go to <b>File &gt; Fetch mods</b>.
+		是否每 15 分钟自动获取插件。这将确保插件列表保持相对最新，但可以禁用以节省带宽。
+		<br />
+		要手动触发获取，请前往 <b>文件 &gt; 获取插件</b>。
 		</TogglePref>
 
 		<LargePrefsHeading>
-			{$activeGame?.name} settings
+			{$activeGame?.name} 设置
 		</LargePrefsHeading>
 
-		<SmallPrefsHeading>Locations</SmallPrefsHeading>
+		<SmallPrefsHeading>位置</SmallPrefsHeading>
 
 		{#if platforms.length > 0}
 			<PlatformPref value={gamePrefs.platform} set={set((value) => (gamePrefs.platform = value))} />
 		{/if}
 
 		<PathPref
-			label={needsDirectory ? 'Game directory' : 'Override directory'}
+			label={needsDirectory ? '游戏目录' : '覆盖目录'}
 			type="dir"
 			canClear={true}
 			value={gamePrefs.dirOverride}
 			set={set((value) => (gamePrefs.dirOverride = value))}
 		>
-			Overrides the path to the {$activeGame?.name} game directory.
-			{#if !needsDirectory}
-				If unset, Gale will try to find it through the specified Steam library instead.
-			{/if}
+		覆盖 {$activeGame?.name} 游戏目录的路径。
+		{#if !needsDirectory}
+			如果未设置，Gale 将尝试通过指定的 Steam 库来查找它。
+		{/if}
 		</PathPref>
 
-		<SmallPrefsHeading>Launch</SmallPrefsHeading>
+		<SmallPrefsHeading>启动</SmallPrefsHeading>
 
 		<LaunchModePref
 			value={gamePrefs.launchMode}

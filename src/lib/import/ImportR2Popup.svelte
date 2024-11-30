@@ -37,26 +37,26 @@
 	}
 </script>
 
-<Popup bind:open title="Import profiles from other manager" canClose={!loading}>
+<Popup bind:open title="从其他管理器导入配置文件" canClose={!loading}>
 	<div class="text-slate-300">
 		<p>
-			This will import profiles <b>for the current game</b> from r2modman or Thunderstore Mod Manager.
+			这将从 r2modman 或 Thunderstore Mod Manager 导入 <b>当前游戏</b> 的配置文件。
 		</p>
 
 		<p class="mt-2">
-			The process may take a couple of minutes, depending on how many mods there are to import.
-			<b>Existing profiles with the same name will be overwritten!</b>
+			该过程可能需要几分钟，具体取决于要导入的模组数量。
+			<b>同名的现有配置文件将被覆盖！</b>
 		</p>
 
-		<p class="mt-2">Do not close Gale while the import is in progress.</p>
+		<p class="mt-2">在导入过程中请勿关闭 Gale。.</p>
 	</div>
 
 	<ImportR2Flow bind:this={importFlow} bind:importData bind:importFrom bind:loading />
 
 	<div class="mr-0.5 mt-3 flex w-full justify-end gap-2">
 		{#if importData?.r2modman || importData?.thunderstore}
-			<BigButton color="slate" on:click={() => (open = false)}>Cancel</BigButton>
-			<BigButton color="accent" on:click={doImport}>Import</BigButton>
+			<BigButton color="slate" on:click={() => (open = false)}>取消</BigButton>
+			<BigButton color="accent" on:click={doImport}>导入</BigButton>
 		{/if}
 	</div>
 </Popup>

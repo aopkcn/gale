@@ -86,25 +86,25 @@
 		{:else}
 			<Icon icon="mdi:arrow-up-circle" class="mr-1" />
 		{/if}
-		<span class="text-sm">{loading ? 'Downloading update...' : 'Update available'}</span>
+		<span class="text-sm">{loading ? '正在下载更新...' : '有更新'}</span>
 	</Button.Root>
 {/if}
 
-<ConfirmPopup title="App update available" bind:open={popupOpen}>
+<ConfirmPopup title="应用程序更新可用" bind:open={popupOpen}>
 	<Dialog.Description class="text-slate-300">
 		<p>
 			{#if nextUpdate}
-				Version {$nextUpdate?.version} of Gale is available - you have {$nextUpdate?.currentVersion}.
+				版本 {$nextUpdate?.version} 的 Gale 已经可用 - 当前版本是 {$nextUpdate?.currentVersion}。
 			{:else}
-				There is an update available for Gale.
+				Gale 有一个可用的更新。
 			{/if}
 
-			The update will be downloaded in the background, then the app will restart to apply it.
+			更新将在后台下载，然后应用程序将重新启动以进行更新。
 		</p>
-		<p class="mt-1">Would you like to install it?</p>
+		<p class="mt-1">您想要安装它吗？</p>
 	</Dialog.Description>
 
 	<svelte:fragment slot="buttons">
-		<BigButton color="accent" fontWeight="semibold" on:click={update}>Install</BigButton>
+		<BigButton color="accent" fontWeight="semibold" on:click={update}>安装</BigButton>
 	</svelte:fragment>
 </ConfirmPopup>

@@ -36,7 +36,7 @@
 
 	const contextItems: ModContextItem[] = [
 		{
-			label: 'Uninstall',
+			label: '卸载',
 			icon: 'mdi:delete',
 			onclick: (mod) =>
 				uninstall({
@@ -45,7 +45,7 @@
 				})
 		},
 		{
-			label: 'Change version',
+			label: '更改版本',
 			icon: 'mdi:edit',
 			onclick: () => {},
 			showFor: (mod) => mod.versions.length > 1,
@@ -56,12 +56,12 @@
 				}))
 		},
 		{
-			label: 'Show dependants',
+			label: '显示依赖模组',
 			icon: 'mdi:source-branch',
 			onclick: openDependants
 		},
 		{
-			label: 'Open directory',
+			label: '打开目录',
 			icon: 'mdi:folder',
 			onclick: (mod) => invokeCommand('open_mod_dir', { uuid: mod.uuid })
 		}
@@ -230,7 +230,7 @@
 				on:click={() => updateMod(selectedMod)}
 			>
 				<Icon icon="mdi:arrow-up-circle" class="align-middle text-xl" />
-				Update to {selectedMod?.versions[0].name}
+				更新至 {selectedMod?.versions[0].name}
 			</Button.Root>
 		{/if}
 	</svelte:fragment>
@@ -239,8 +239,8 @@
 		{#if unknownMods.length > 0}
 			<div class="mb-1 mr-3 flex items-center rounded-lg bg-red-600 py-1.5 pl-3 pr-1 text-red-100">
 				<Icon icon="mdi:alert-circle" class="mr-2 text-xl" />
-				The following {unknownMods.length === 1 ? 'mod' : 'mods'} could not be found: {unknownMods
-					.map((mod) => mod.fullName)
+				以下 {unknownMods.length === 1 ? '插件' : '插件项'} 未找到：{unknownMods
+			.map((mod) => mod.fullName)
 					.join(', ')}.
 				<Button.Root
 					class="ml-1 font-semibold text-white hover:text-red-100 hover:underline"
@@ -248,7 +248,7 @@
 						unknownMods.forEach(uninstall);
 					}}
 				>
-					Uninstall them?
+				卸载它们吗?
 				</Button.Root>
 			</div>
 		{/if}
@@ -268,10 +268,10 @@
 	</svelte:fragment>
 </ModList>
 
-<Popup title="Dependants of {activeMod?.name}" bind:open={dependantsOpen}>
+<Popup title="依赖于{activeMod?.name}的模组" bind:open={dependantsOpen}>
 	<div class="mt-4 text-center text-slate-300">
 		{#if dependants.length === 0}
-			No dependants found 😢
+		未找到依赖模组 😢
 		{:else}
 			<ModCardList names={dependants} showVersion={false} />
 		{/if}

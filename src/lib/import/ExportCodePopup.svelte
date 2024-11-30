@@ -23,13 +23,13 @@
 	}
 </script>
 
-<Popup title="Export as code" bind:open={isOpen}>
+<Popup title="导出为代码" bind:open={isOpen}>
 	<Dialog.Description class="flex-center mb-2 flex text-slate-400">
 		{#await codePromise}
 			<Icon icon="mdi:loading" class="mr-2 animate-spin text-lg" />
-			Exporting {$activeProfile?.name} as code...
+			正在导出 {$activeProfile?.name} 作为代码...
 		{:then}
-			Export complete! The code has been copied to your clipboard:
+			导出完成！代码已经复制到您的剪贴板
 		{/await}
 	</Dialog.Description>
 

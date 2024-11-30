@@ -43,7 +43,7 @@
 </script>
 
 <div class="relative mt-1 flex-grow">
-	<SearchBar bind:value={searchTerm} placeholder="Search for games..." />
+	<SearchBar bind:value={searchTerm} placeholder="搜索游戏..." />
 </div>
 
 <div class="mt-2 flex h-80 flex-col overflow-y-scroll">
@@ -72,7 +72,7 @@
 						{#if game.modLoader !== ModLoader.BepInEx}
 							<Tooltip
 								class="inline-flex rounded bg-red-600 p-0.5 text-sm text-white"
-								text="Experimental support. Here be dragons!"
+								text="实验性支持，存在风险!"
 							>
 								<Icon icon="mdi:beta" />
 							</Tooltip>
@@ -105,17 +105,16 @@
 			</Button.Root>
 		{/each}
 	{:else}
-		<div class="mt-4 text-center text-slate-300">No games found 😢</div>
+		<div class="mt-4 text-center text-slate-300">未找到游戏 😢</div>
 		<div class="max-w-[35rem] text-sm text-slate-400">
-			Your game missing? If the game is new on Thunderstore there's a chance we have yet to add it.
-			If you can find it on
-			<Link href="https://thunderstore.io">thunderstore.io</Link>
-			but not here, please message us on
-			<Link href="https://discord.com/channels/1168655651455639582/1246088342458863618"
-				>Discord</Link
-			>
-			or open an issue on
-			<Link href="https://github.com/Kesomannen/ModManager/issues/">our Github</Link>
+		  找不到您的游戏？如果游戏是新加入 Thunderstore 的，我们可能还未添加它。
+		  如果您在
+		  <Link href="https://thunderstore.io">thunderstore.io</Link>
+		  上能找到它，但在这里找不到，请通过
+		  <Link href="https://discord.com/channels/1168655651455639582/1246088342458863618">Discord</Link>
+		  与我们联系，或者在
+		  <Link href="https://github.com/Kesomannen/ModManager/issues/">我们的 Github</Link>
+		  上提交问题。
 		</div>
-	{/if}
+	  {/if}
 </div>

@@ -55,11 +55,11 @@
 		<nav
 			class="flex w-14 flex-shrink-0 flex-col items-center gap-1 border-r border-slate-600 bg-slate-900 p-2"
 		>
-			<NavbarLink to="/" icon="mdi:account-circle" tooltip="Manage profile" />
-			<NavbarLink to="/browse" icon="mdi:store-search" tooltip="Browse Thunderstore mods" />
-			<NavbarLink to="/config" icon="mdi:file-cog" tooltip="Edit mod config" />
-			<NavbarLink to="/modpack" icon="mdi:package-variant" tooltip="Export modpack" />
-			<NavbarLink to="/prefs" icon="mdi:settings" tooltip="Edit manager settings" />
+			<NavbarLink to="/" icon="mdi:account-circle" tooltip="管理配置" />
+			<NavbarLink to="/browse" icon="mdi:store-search" tooltip="浏览 Thunderstore 模组" />
+			<NavbarLink to="/config" icon="mdi:file-cog" tooltip="编辑模组配置" />
+			<NavbarLink to="/modpack" icon="mdi:package-variant" tooltip="导出模组包" />
+			<NavbarLink to="/prefs" icon="mdi:settings" tooltip="编辑管理设置" />
 		</nav>
 
 		<slot />

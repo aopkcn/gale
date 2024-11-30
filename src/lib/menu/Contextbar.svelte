@@ -27,7 +27,7 @@
 	let profilesOpen = false;
 
 	function deleteProfile(index: number) {
-		confirm(`Are you sure you want to delete ${profiles[index].name}?`).then(async (result) => {
+		confirm(`您确定要删除 ${profiles[index].name}?`).then(async (result) => {
 			if (result) {
 				await invokeCommand('delete_profile', { index });
 				refreshProfiles();
@@ -50,7 +50,7 @@
 			on:click={() => launchGame(false)}
 		>
 			<Icon icon="mdi:play-circle" class="mr-2 text-xl" />
-			Launch game
+			启动游戏
 		</Button.Root>
 	</div>
 
@@ -67,7 +67,7 @@
 
 			{$activeGame.name}
 		{:else}
-			Loading...
+			加载中...
 		{/if}
 
 		<Icon
@@ -144,7 +144,7 @@
 				on:click={() => (newProfilePopupOpen = true)}
 			>
 				<Icon icon="mdi:plus" class="mr-1 text-lg" />
-				New profile
+				新配置
 			</DropdownMenu.Item>
 		</DropdownMenu.Content>
 	</DropdownMenu.Root>
@@ -152,13 +152,13 @@
 	<Updater />
 </div>
 
-<Popup title="Launching {$activeGame?.name}..." bind:open={launchGamePopupOpen}>
+<Popup title="正在启动 {$activeGame?.name}..." bind:open={launchGamePopupOpen}>
 	<Dialog.Description class="text-slate-400">
-		If the game is taking a while to start, it's probably because Steam is starting up.
+		如果游戏启动较慢，可能是因为 Steam 正在启动。
 	</Dialog.Description>
 </Popup>
 
-<Popup title="Select game to mod" bind:open={gamesOpen}>
+<Popup title="选择要安装模组的游戏" bind:open={gamesOpen}>
 	<GameSelection onSelect={() => (gamesOpen = false)} />
 </Popup>
 

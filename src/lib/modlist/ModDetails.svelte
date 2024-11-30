@@ -33,7 +33,7 @@
 	$: allContextItems = [
 		...contextItems,
 		{
-			label: 'Close',
+			label: '关闭',
 			icon: 'mdi:close',
 			onclick: () => dispatch('close')
 		}
@@ -135,7 +135,7 @@
 
 	{#if mod.lastUpdated !== null}
 		<div class="text-lg text-slate-400">
-			Last updated {timeSince(new Date(mod.lastUpdated))} ago
+			上次更新于 {timeSince(new Date(mod.lastUpdated))} 前
 		</div>
 	{/if}
 
@@ -177,7 +177,7 @@
 			on:click={() => (changelogOpen = true)}
 		>
 			<Icon icon="mdi:file-document" class="mr-2 text-lg" />
-			Changelog
+			更新日志
 		</Button.Root>
 
 		<Button.Root
@@ -186,7 +186,7 @@
 			on:click={() => (readmeOpen = true)}
 		>
 			<Icon icon="mdi:info" class="mr-2 text-lg" />
-			Details
+			详情
 		</Button.Root>
 	{/if}
 
@@ -196,7 +196,7 @@
 			on:click={() => (dependenciesOpen = true)}
 		>
 			<Icon icon="material-symbols:network-node" class="mr-2 text-lg" />
-			Dependencies
+			依赖项
 			<div class="ml-auto rounded-md bg-slate-500 px-3 py-0.5 text-sm group-hover:bg-slate-400">
 				{mod.dependencies.length}
 			</div>
@@ -208,7 +208,7 @@
 
 <Popup
 	large={(mod.dependencies?.length ?? 0) > 10}
-	title="Dependencies of {mod.name}"
+	title="依赖项：{mod.name}"
 	bind:open={dependenciesOpen}
 >
 	{#if mod.dependencies}

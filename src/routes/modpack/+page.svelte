@@ -201,14 +201,14 @@
 	{/if}
 
 	<FormField
-		label="Name"
-		description="The name of the modpack, as shown on Thunderstore. Make sure this stays consistent between updates. Cannot contain spaces or hyphens."
+		label="名称"
+		description="模组包的名称，如在 Thunderstore 上显示的名称。确保在更新时保持一致。名称不能包含空格或连字符。"
 		required={true}
 	>
 		<InputField
 			on:change={saveArgs}
 			bind:value={name}
-			placeholder="Enter name..."
+			placeholder="请输入名称..."
 			required={true}
 			pattern="^[a-zA-Z0-9_]+$"
 			class="w-full"
@@ -216,24 +216,24 @@
 	</FormField>
 
 	<FormField
-		label="Author"
-		description="The author of the modpack, which should be the name of your Thunderstore team."
+		label="作者"
+		description="模组包的作者，应为您的 Thunderstore 团队名称。"
 		required={true}
 	>
 		<InputField
 			on:change={saveArgs}
 			bind:value={author}
-			placeholder="Enter author..."
+			placeholder="请输入作者..."
 			required={true}
 			class="w-full"
 		/>
 	</FormField>
 
-	<FormField label="Description" description="A short description of the modpack." required={true}>
+	<FormField label="描述" description="模组包的简短描述。" required={true}>
 		<InputField
 			on:change={saveArgs}
 			bind:value={description}
-			placeholder="Enter description..."
+			placeholder="请输入描述..."
 			required={true}
 			maxlength={250}
 			class="w-full"
@@ -241,8 +241,8 @@
 	</FormField>
 
 	<FormField
-		label="Categories"
-		description="The categories that the modpack belongs to. 'Modpacks' is always included."
+		label="分类"
+		description="模组包所属的分类。'Modpacks' 会始终包含在内。"
 	>
 		<Dropdown
 			avoidCollisions={false}
@@ -258,7 +258,7 @@
 				class="flex w-full items-center overflow-hidden rounded-lg border border-slate-500 border-opacity-0 bg-slate-900 py-1 pl-1 pr-3 hover:border-opacity-100"
 			>
 				{#if selectedCategories.length === 0}
-					<span class="truncate pl-2 text-slate-400">Select categories...</span>
+					<span class="truncate pl-2 text-slate-400">选择分类...</span>
 				{:else}
 					<div class="flex flex-wrap gap-1">
 						{#each selectedCategories as category}
@@ -288,90 +288,88 @@
 	</FormField>
 
 	<FormField
-		label="Version"
-		description="The version number of the modpack, in the format of X.Y.Z.
-			           You cannot publish with the same version number twice."
+		label="版本"
+		description="模组包的版本号，格式为 X.Y.Z。
+			           您不能使用相同的版本号发布两次。"
 		required={true}
 	>
 		<InputField
 			on:change={saveArgs}
 			bind:value={versionNumber}
-			placeholder="Enter version number..."
+			placeholder="请输入版本号..."
 			required={true}
 			pattern="^\d+\.\d+\.\d+$"
 			class="w-full"
 		/>
 	</FormField>
 
-	<FormField label="Website" description="The URL of a website of your choosing. Optional.">
+	<FormField label="网站" description="您选择的网址链接。可选。">
 		<InputField
 			on:change={saveArgs}
 			bind:value={websiteUrl}
-			placeholder="Enter website URL..."
+			placeholder="请输入网站网址..."
 			pattern={URL_PATTERN}
 			class="w-full"
 		/>
 	</FormField>
 
 	<FormField
-		label="Icon"
-		description="Path to the icon of the modpack. This is automatically resized to 256x256 pixels, so
-                 it's recommended to be a square image to avoid stretching or squishing."
+		label="图标"
+		description="模组包图标的路径。此图标会自动调整为 256x256 像素，因此建议使用方形图片，避免拉伸或压缩。"
 		required={true}
 	>
 		<PathField icon="mdi:file-image" onClick={browseIcon} value={iconPath} />
 	</FormField>
 
 	<FormField
-		label="Readme"
-		description="A longer description of the modpack, which supports markdown formatting 
-                 (similarly to Discord messages)."
+		label="自述"
+		description="模组包的详细描述，支持 markdown 格式（类似于 Discord 消息）。"
 		required={true}
 	>
 		<ResizableInputField
 			on:change={saveArgs}
 			bind:value={readme}
-			placeholder="Enter readme..."
+			placeholder="请输入自述..."
 			mono={true}
 		/>
 
 		<details class="mt-1">
-			<summary class="cursor-pointer text-sm text-slate-300">Preview</summary>
+			<summary class="cursor-pointer text-sm text-slate-300">预览</summary>
 			<Markdown class="mt-1 px-4" source={readme} />
 			<div class="mt-4 h-[2px] bg-slate-500" />
 		</details>
 	</FormField>
 
 	<FormField
-		label="Changelog"
-		description="A list of changes in the modpack, also supports markdown formatting. Leave empty to omit."
+		label="更新日志"
+		description="模组包的更改列表，支持 markdown 格式。如果不需要显示，可以留空。"
 	>
 		<ResizableInputField
 			on:change={saveArgs}
 			bind:value={changelog}
-			placeholder="Enter changelog..."
+			placeholder="请输入更新日志..."
 			mono={true}
 		/>
 
 		<BigButton color="slate" on:click={() => generateChangelog(false)}
-			>Generate for {versionNumber}</BigButton
+			>为版本 {versionNumber} 生成</BigButton
 		>
-		<BigButton color="slate" on:click={() => generateChangelog(true)}>Generate all</BigButton>
+		<BigButton color="slate" on:click={() => generateChangelog(true)}>生成所有</BigButton>
 
 		<details class="mt-1">
-			<summary class="cursor-pointer text-sm text-slate-300">Preview</summary>
+			<summary class="cursor-pointer text-sm text-slate-300">预览</summary>
 			<Markdown class="mt-1 px-4" source={changelog} />
 			<div class="mt-4 h-[2px] bg-slate-500" />
 		</details>
 	</FormField>
 
 	<FormField
-		label="Include files ({includedFileCount}/{includeFiles?.size})"
-		description="Choose which config files to include in the modpack."
+		label="包含文件 ({includedFileCount}/{includeFiles?.size})"
+		description="选择要包含在模组包中的配置文件。"
 	>
 		<details>
 			{#if includeFiles}
-				<summary class="cursor-pointer text-sm text-slate-300">Show list</summary>
+				<summary class="cursor-pointer text-sm text-slate-300">显示文件列表</summary>
 				<Checklist
 					class="mt-1"
 					title="Include all"
@@ -388,20 +386,20 @@
 	</FormField>
 
 	<div class="mt-1 flex items-center text-lg font-medium text-slate-200">
-		<span class="max-w-96 flex-grow">Contains NSFW content</span>
+		<span class="max-w-96 flex-grow">包含NSFW内容</span>
 
 		<Checkbox onValueChanged={saveArgs} bind:value={nsfw} />
 	</div>
 
 	<div class="flex items-center text-lg font-medium text-slate-200">
-		<span class="max-w-96 flex-grow">Include disabled mods</span>
+		<span class="max-w-96 flex-grow">包含禁用模组</span>
 
 		<Checkbox onValueChanged={saveArgs} bind:value={includeDisabled} />
 	</div>
 
 	<div class="mt-3 flex justify-end gap-2">
-		<BigButton color="slate" on:click={exportToFile}>Export to file</BigButton>
-		<BigButton color="accent" on:click={uploadToThunderstore}>Publish on Thunderstore</BigButton>
+		<BigButton color="slate" on:click={exportToFile}>导出到文件</BigButton>
+		<BigButton color="accent" on:click={uploadToThunderstore}>发布到Thunderstore</BigButton>
 	</div>
 </div>
 
@@ -410,15 +408,15 @@
 <Popup bind:open={donePopupOpen} title="Modpack upload complete">
 	<Dialog.Description class="text-slate-300">
 		{name}
-		{versionNumber} has successfully been published on Thunderstore!
+		{versionNumber} 已成功发布到Thunderstore!
 		<Link href="https://thunderstore.io/c/{$activeGame?.slug}/p/{author}/{name}"
-			>Click here to view its page on the website</Link
+			>点击这里查看其在网站上的页面</Link
 		>.
 	</Dialog.Description>
 
 	<div class="mt-2 text-sm text-slate-400">
-		The changes may take up to an hour to appear in Gale and other mod managers.
+		更改可能需要最多一个小时才能在 Gale 和其他模组管理器中显示。
 		<br />
-		To publish a new update, increment the version number and publish the modpack again.
+		要发布新的更新，请增加版本号并重新发布模组包。
 	</div>
 </Popup>

@@ -20,19 +20,25 @@
 	});
 </script>
 
-<Popup bind:open title="About">
+<Popup bind:open title="关于">
 	<div class="h-3" />
 	<img src="logo.png" alt="Logo" class="float-right size-20" />
 	<div>
 		<h3 class="text-xl font-semibold text-white">Gale</h3>
 		<p class="text-slate-300">
-			Version {version}
+			版本 {version}
 			<br />
-			GNU General Public License v3.0
+			GNU 通用公共许可证 v3.0
+			<br />
+			汉化：蝼蚁梦
 		</p>
 		<div class="mt-3 flex items-center gap-2">
 			<Icon icon="mdi:file-document" class="text-xl text-white" />
-			<Link href="https://github.com/Kesomannen/gale/blob/master/CHANGELOG.md">Changelog</Link>
+			<Link href="https://www.aopk.cn">资源工坊</Link>
+		</div>
+		<div class="mt-3 flex items-center gap-2">
+			<Icon icon="mdi:file-document" class="text-xl text-white" />
+			<Link href="https://github.com/Kesomannen/gale/blob/master/CHANGELOG.md">更新日志</Link>
 		</div>
 		<div class="mt-1 flex items-center gap-2">
 			<Icon icon="mdi:github" class="text-xl text-white" />
@@ -50,7 +56,7 @@
 				class="mr-2"
 			>
 				<Icon icon="mdi:refresh" class="mr-2" />
-				Check for updates</BigButton
+				检查更新</BigButton
 			>
 
 			{#if $isChecking}

@@ -23,7 +23,7 @@
 			on:click={() => {
 				onCancel();
 				open = false;
-			}}>Cancel</BigButton
+			}}>取消</BigButton
 		>
 		<slot name="buttons" />
 	</div>
