@@ -58,7 +58,7 @@ pub(super) fn gather_info(app: &AppHandle) -> ManagerData<ProfileImportData> {
 pub(super) async fn import(path: PathBuf, include: &[bool], app: &AppHandle) -> Result<()> {
     wait_for_mods(app).await;
 
-    info!("importing profiles from {}", path.display());
+    info!("正在从 {} 导入配置文件", path.display());
 
     for (i, profile_dir) in find_profiles(path, app)?.enumerate() {
         if !include[i] {
@@ -74,8 +74,8 @@ pub(super) async fn import(path: PathBuf, include: &[bool], app: &AppHandle) -> 
             }
             Err(err) => {
                 logger::log_webview_err(
-                    "Error while importing from r2modman",
-                    err.wrap_err(format!("Failed to prepare import of profile '{}'", name)),
+                    "从 r2modman 导入时出错",
+                    err.wrap_err(format!("准备导入配置文件 '{}' 时失败", name)),
                     app,
                 );
                 continue;
@@ -84,8 +84,8 @@ pub(super) async fn import(path: PathBuf, include: &[bool], app: &AppHandle) -> 
 
         if let Err(err) = import_profile(data, app).await {
             logger::log_webview_err(
-                "Error while importing from r2modman",
-                err.wrap_err(format!("Failed to import profile '{}'", name)),
+                "从 r2modman 导入时出错",
+                err.wrap_err(format!("导入配置文件 '{}' 时失败", name)),
                 app,
             );
 
@@ -96,7 +96,7 @@ pub(super) async fn import(path: PathBuf, include: &[bool], app: &AppHandle) -> 
 
             if let Some(index) = game.profile_index(&name) {
                 game.delete_profile(index, true).unwrap_or_else(|_| {
-                    warn!("failed to delete possibly corrupted profile '{}'", name)
+                    warn!("删除可能已损坏的配置文件 '{}' 时失败", name)
                 });
             }
         };
@@ -112,21 +112,21 @@ fn find_profiles(mut path: PathBuf, app: &AppHandle) -> Result<impl Iterator<Ite
     path.push(&*manager.active_game.r2_dir_name);
     path.push("profiles");
 
-    debug!("scanning {path:?}");
+    debug!("正在扫描 {path:?}");
 
-    ensure!(path.exists(), "no profiles found");
+    ensure!(path.exists(), "未找到配置文件");
 
     Ok(path
         .read_dir()
-        .fs_context("reading profiles directory", &path)?
+        .fs_context("读取配置文件目录", &path)?
         .filter_map(|entry| entry.ok())
         .filter(|entry| entry.file_type().unwrap().is_dir())
         .map(|entry| entry.path()))
 }
 
 async fn import_profile(data: ImportData, app: &AppHandle) -> Result<()> {
-    info!("importing profile '{}'", data.name);
-    emit_update(&format!("Importing profile '{}'... 0%", data.name), app);
+    info!("正在导入配置文件 '{}'", data.name);
+    emit_update(&format!("正在导入配置文件 '{}'... 0%", data.name), app);
 
     let name = data.name.clone();
 
@@ -138,7 +138,7 @@ async fn import_profile(data: ImportData, app: &AppHandle) -> Result<()> {
             .on_progress(Box::new(move |progress, app| {
                 let percentage = (progress.total_progress * 100.0).round();
                 emit_update(
-                    &format!("Importing profile '{}'... {}%", name, percentage),
+                    &format!("正在导入配置文件 '{}'... {}%", name, percentage),
                     app,
                 );
             })),
@@ -160,26 +160,26 @@ fn prepare_import(mut profile_dir: PathBuf, app: &AppHandle) -> Result<Option<Im
     profile_dir.push("mods.yml");
 
     if !profile_dir.exists() {
-        info!("no mods.yml in '{}', skipping", name);
+        info!("在 '{}' 中没有找到 mods.yml，跳过", name);
         return Ok(None);
     }
-    let yaml = fs::read_to_string(&profile_dir).fs_context("reading mods.yml", &profile_dir)?;
-    let mods = serde_yaml::from_str::<Vec<R2Mod>>(&yaml).context("failed to parse mods.yml")?;
+    let yaml = fs::read_to_string(&profile_dir).fs_context("读取 mods.yml", &profile_dir)?;
+    let mods = serde_yaml::from_str::<Vec<R2Mod>>(&yaml).context("解析 mods.yml 失败")?;
 
     profile_dir.pop();
 
     if mods.is_empty() {
-        info!("profile '{}' is empty, skipping", name);
+        info!("配置文件 '{}' 是空的，跳过", name);
         return Ok(None);
     }
 
     if let Some(index) = manager.active_game().profile_index(&name) {
-        info!("deleting existing profile '{}'", name);
+        info!("删除已存在的配置文件 '{}'", name);
 
         manager
             .active_game_mut()
             .delete_profile(index, true)
-            .context("failed to delete existing profile")?;
+            .context("删除已存在的配置文件失败")?;
     }
 
     ImportData::create(
@@ -205,7 +205,7 @@ async fn wait_for_mods(app: &AppHandle) {
             }
         }
 
-        emit_update("Fetching mods from Thunderstore...", app);
+        emit_update("从 Thunderstore 获取模组...", app);
 
         tokio::time::sleep(Duration::from_secs(1)).await;
     }

@@ -12,18 +12,18 @@
 </script>
 
 <div class="mt-1 flex items-center">
-	<Label text="Set custom launch arguments">
+	<Label text="设置自定义启动参数">
 		<p>
-			Allows you to add custom arguments to the launch command. Depending on <b>Launch mode</b>,
-			these are either ran against the game or steam executable.
+			允许您将自定义参数添加到启动命令中。根据 <b>启动模式</b>，
+			这些参数将针对游戏或 Steam 可执行文件运行。
 		</p>
-
+	
 		<p>
-			Only pass one argument per entry, so instead of <code>--foo value</code>, pass
-			<code>--foo</code>
-			and <code>value</code> separately.
+			每个条目只能传递一个参数，因此不要传递 <code>--foo value</code>，
+			而是分别传递 <code>--foo</code> 和 <code>value</code>。
 		</p>
 	</Label>
+	
 
 	<Checkbox
 		value={value !== null}
@@ -60,7 +60,7 @@
 		{/each}
 
 		<InputField
-			placeholder="Enter new argument..."
+			placeholder="输入新参数..."
 			bind:value={newArg}
 			on:change={() => {
 				if (newArg.length === 0 || value === null) return;

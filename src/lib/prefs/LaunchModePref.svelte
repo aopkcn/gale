@@ -35,10 +35,10 @@
 	<Label text="启动模式">
 		<p>决定游戏的启动方式。</p>
 		<p class="my-1.5">
-			<b>启动器：</b> 通过指定的平台启动游戏。
+			<b>launcher：</b> 通过指定的平台启动游戏。
 		</p>
 		<p>
-			<b>直接：</b> 直接从可执行文件启动游戏。允许同时启动多个实例。
+			<b>direct：</b> 直接从可执行文件启动游戏。允许同时启动多个实例。
 		</p>
 	</Label>
 
@@ -54,8 +54,8 @@
 </div>
 
 <div class="flex items-center">
-	<Label text="Number of instances">
-		How many instances of the game to launch at once. Only available in direct mode.
+	<Label text="实例数量">
+		一次启动多少个游戏实例。仅在直接模式下可用。
 	</Label>
 
 	<InputField
@@ -69,9 +69,8 @@
 </div>
 
 <div class="flex items-center">
-	<Label text="Interval between launches">
-		How many seconds to wait between launching each instance. Only applicable in direct mode with
-		multiple instances.
+	<Label text="启动间隔时间">
+		每个实例启动之间等待多少秒。仅在直接模式下并且有多个实例时适用。
 	</Label>
 
 	<InputField
@@ -83,3 +82,4 @@
 		}}
 	/>
 </div>
+

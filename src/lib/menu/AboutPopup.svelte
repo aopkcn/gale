@@ -61,14 +61,14 @@
 
 			{#if $isChecking}
 				<Icon icon="mdi:loading" class="animate-spin text-xl text-slate-400" />
-				<span class="text-slate-400">Checking for updates...</span>
+				<span class="text-slate-400">正在检查更新...</span>
 			{:else if checkedUpdate}
 				{#if $nextUpdate === null}
 					<Icon icon="mdi:check" class="text-xl text-slate-300" />
-					<span class="text-slate-300">You are running the latest version</span>
+					<span class="text-slate-300">您已运行最新版本</span>
 				{:else}
 					<Icon icon="mdi:arrow-up-circle" class="inline text-xl text-accent-400" />
-					<span class="text-accent-400">New version available: {$nextUpdate?.version}</span>
+					<span class="text-accent-400">有新版本可用: {$nextUpdate?.version}</span>
 				{/if}
 			{/if}
 		</div>

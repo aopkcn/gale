@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex items-center">
-	<Label text="Zoom factor">Changes the zoom level of the app.</Label>
+	<Label text="缩放比例">更改应用的缩放级别。</Label>
 
 	<Dropdown
 		class="flex-grow"

@@ -120,7 +120,7 @@
 		{/if}
 
 		<PathPref
-			label={needsDirectory ? '游戏目录' : '覆盖目录'}
+			label={needsDirectory ? '游戏目录' : '游戏路径'}
 			type="dir"
 			canClear={true}
 			value={gamePrefs.dirOverride}

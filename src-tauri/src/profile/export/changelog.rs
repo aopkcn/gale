@@ -28,14 +28,14 @@ pub(super) fn generate_all(
     let current_version: semver::Version = args
         .version_number
         .parse()
-        .context("invalid version number")?;
+        .context("无效的版本号")?;
 
     let mut snapshots = profile
         .find_snapshots()?
         .filter(|(_, version)| *version < current_version)
         .map(|(entry, version)| {
             let mods = util::fs::read_json::<Vec<ModId>>(entry.path())
-                .with_context(|| format!("failed to read snapshot for version {}", version))?;
+            .with_context(|| format!("读取版本 {} 的快照失败", version))?;
 
             let mods = borrow_mods(mods, thunderstore);
 
@@ -101,7 +101,7 @@ pub(super) fn generate_latest(
     let version = args
         .version_number
         .parse()
-        .context("invalid version number")?;
+        .context("无效的版本号")?;
 
     let latest_snapshot = profile
         .find_snapshots()?
@@ -112,7 +112,7 @@ pub(super) fn generate_latest(
 
     let latest_snapshot = match latest_snapshot {
         Some(snapshot) => snapshot,
-        None => bail!("no previous version found to compare against"),
+        None => bail!("未找到可用于比较的先前版本"),
     };
 
     let old_mods = borrow_mods(latest_snapshot, thunderstore);

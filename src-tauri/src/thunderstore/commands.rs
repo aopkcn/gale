@@ -46,7 +46,7 @@ pub fn trigger_mod_fetch(
     let state = state.lock().unwrap();
 
     if state.is_fetching {
-        return Err(anyhow!("already fetching mods").into());
+        return Err(anyhow!("正在获取模组").into());
     }
 
     let write_directly = !state.packages_fetched;
@@ -54,7 +54,7 @@ pub fn trigger_mod_fetch(
 
     tauri::async_runtime::spawn(async move {
         if let Err(err) = super::fetch::fetch_packages(&app, game, write_directly).await {
-            logger::log_webview_err("error while fetching mods from Thunderstore", err, &app);
+            logger::log_webview_err("从 Thunderstore 获取模组时出错", err, &app);
         }
     });
 

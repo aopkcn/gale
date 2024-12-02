@@ -35,12 +35,12 @@ pub(super) async fn fetch_package_loop(app: AppHandle, game: Game) {
 
         // always fetch once, even if the setting is turned off
         if !fetch_automatically && !is_first {
-            info!("automatic fetch cancelled by user setting");
+            info!("自动拉取已被用户设置取消");
             break;
         };
 
         if let Err(err) = loop_iter(game, &mut is_first, &app, thunderstore.clone()).await {
-            logger::log_webview_err("Error while fetching packages from Thunderstore", err, &app);
+            logger::log_webview_err("从 Thunderstore 拉取包时出错", err, &app);
         }
 
         tokio::time::sleep(FETCH_INTERVAL).await;
@@ -53,7 +53,7 @@ pub(super) async fn fetch_package_loop(app: AppHandle, game: Game) {
         thunderstore: StateMutex<'_, Thunderstore>,
     ) -> Result<()> {
         if thunderstore.lock().unwrap().is_fetching {
-            warn!("automatic fetch cancelled due to ongoing fetch");
+            warn!("由于正在进行的拉取操作，自动拉取已被取消");
             return Ok(());
         }
 
@@ -80,7 +80,7 @@ fn read_and_insert_cache(manager: StateMutex<ModManager>, state: StateMutex<Thun
             }
         }
         Ok(None) => (),
-        Err(err) => warn!("failed to read cache: {}", err),
+        Err(err) => warn!("读取缓存失败: {}", err),
     }
 }
 
@@ -102,7 +102,7 @@ pub(super) async fn fetch_packages(
     const INSERT_EVERY: usize = 1000;
 
     info!(
-        "fetching packages for {}, write_directly: {}",
+        "正在为 {} 拉取模组，直接写入: {}",
         game.slug, write_directly
     );
 
@@ -148,7 +148,7 @@ pub(super) async fn fetch_packages(
                         package_count += 1;
                     }
                 }
-                Err(err) => warn!("failed to deserialize package: {}", err),
+                Err(err) => warn!("反序列化模组包失败: {}", err),
             }
 
             str_buffer.replace_range(..index + 4, "");
@@ -181,7 +181,7 @@ pub(super) async fn fetch_packages(
     state.is_fetching = false;
 
     info!(
-        "fetched {} packages for {} in {:?}",
+        "已获取 {} 个模组，用于 {}，耗时 {:?}",
         state.packages.len(),
         game.slug,
         start_time.elapsed()
@@ -194,7 +194,7 @@ pub(super) async fn fetch_packages(
     fn emit_update(mods: usize, app: &AppHandle) {
         app.emit(
             "status_update",
-            Some(format!("Fetching mods from Thunderstore... {}", mods)),
+            Some(format!("从 Thunderstore 获取模组中... {}", mods)),
         )
         .ok();
     }

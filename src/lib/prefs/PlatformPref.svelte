@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex items-center">
-	<Label text="Platform">The platform where your game is installed.</Label>
+	<Label text="平台">您的游戏安装所在的平台。</Label>
 
 	<Dropdown
 		class="flex-grow"
